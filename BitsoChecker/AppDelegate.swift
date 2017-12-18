@@ -17,17 +17,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var item : NSStatusItem? = nil
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-        
         item = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
         
         //Displays text on menu bar
-        item?.title = "TestMe"
-        
-        // Defines function to run when the user clicks on the text on menu bar
-        //item?.action = #selector(AppDelegate.testMe)
+        item?.title = "BitsoChecker"
         
         let menu = NSMenu()
+        // Defines function to run when the user clicks on the text on menu bar
         menu.addItem(NSMenuItem(title: "BTC - MXN", action: #selector(AppDelegate.btcMxn), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "ETH - MXN", action: #selector(AppDelegate.ethMxn), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "XRP - BTC", action: #selector(AppDelegate.xrpBtc), keyEquivalent: ""))

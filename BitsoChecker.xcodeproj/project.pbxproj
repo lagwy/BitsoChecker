@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		99A5084C1FE837C700ABCDDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A5084B1FE837C700ABCDDE /* AppDelegate.swift */; };
 		99A5084E1FE837C700ABCDDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99A5084D1FE837C700ABCDDE /* Assets.xcassets */; };
+		99A5085B1FE83DC800ABCDDE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99A5085A1FE83DC800ABCDDE /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		99A5084B1FE837C700ABCDDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99A5084D1FE837C700ABCDDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99A508521FE837C700ABCDDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99A5085A1FE83DC800ABCDDE /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 			children = (
 				99A5084B1FE837C700ABCDDE /* AppDelegate.swift */,
 				99A5084D1FE837C700ABCDDE /* Assets.xcassets */,
+				99A5085A1FE83DC800ABCDDE /* MainMenu.xib */,
 				99A508521FE837C700ABCDDE /* Info.plist */,
 			);
 			path = BitsoChecker;
@@ -115,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99A5084E1FE837C700ABCDDE /* Assets.xcassets in Resources */,
+				99A5085B1FE83DC800ABCDDE /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +233,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = BitsoChecker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = lamg.BitsoChecker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -243,7 +247,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = BitsoChecker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = lamg.BitsoChecker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

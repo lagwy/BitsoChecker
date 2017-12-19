@@ -15,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
     
     var item : NSStatusItem? = nil
+    var currency1 : String? = "btc"
+    var currency2 : String? = "mxn"
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         item = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
@@ -32,186 +34,71 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "BCH - BTC", action: #selector(AppDelegate.bchBtc), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(AppDelegate.quitApp), keyEquivalent: ""))
         item?.menu = menu
+        
+        loadCurrency()
+    }
+    
+    func loadCurrency(){
+        let stringUrl = "https://api.bitso.com/v3/ticker?book=" + (self.currency1)! + "_" + (self.currency2)!
+        let url = URL(string: stringUrl )
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            if (error != nil) {
+                print("error")
+            } else {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
+                    
+                    if ( (json["success"] as? Bool ) == true ){
+                        // payload array
+                        let payload = json["payload"] as? [String: Any]
+                        let ask = payload?["ask"] as? String
+                        let menuTitle = "1 " + (self.currency1!).uppercased() + " = " + ask! + " " + (self.currency2!).uppercased() + ""
+                        self.item?.title = menuTitle as String
+                        
+                        // print("somethig".uppercased())
+                    }
+                    
+                    
+                } catch let error as NSError{
+                    print(error)
+                }
+            }
+        }).resume()
+        
+        // wait a minute and call again
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60.0, execute: {
+            self.loadCurrency()
+        })
     }
     
     func btcMxn(){
-        let url = URL(string: "https://api.bitso.com/v3/ticker?book=btc_mxn")!
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if (error != nil) {
-                print("error")
-            } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
-                    
-                    if ( (json["success"] as? Bool ) == true ){
-                        // payload array
-                        let payload = json["payload"] as? [String: Any]
-                        let ask = payload?["ask"] as? String
-                        // print(ask)
-                        self.item?.title = "1 BTC = " + ask! + " MXN"
-                    }
-                
-                    
-                } catch let error as NSError{
-                    print(error)
-                }
-            }
-        }).resume()
-        
-        // wait a minute and call again
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60.0, execute: {
-            self.btcMxn()
-        })
+        currency1 = "btc"
+        currency2 = "mxn"
     }
     
     func ethMxn(){
-        let url = URL(string: "https://api.bitso.com/v3/ticker?book=eth_mxn")!
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if (error != nil) {
-                print("error")
-            } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
-                    
-                    if ( (json["success"] as? Bool ) == true ){
-                        // payload array
-                        let payload = json["payload"] as? [String: Any]
-                        let ask = payload?["ask"] as? String
-                        // print(ask)
-                        self.item?.title = "1 ETH = " + ask! + " MXN"
-                    }
-                    
-                    
-                } catch let error as NSError{
-                    print(error)
-                }
-            }
-        }).resume()
-        
-        // wait a minute and call again
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60.0, execute: {
-            self.ethMxn()
-        })
+        currency1 = "eth"
+        currency2 = "mxn"
     }
     
     func xrpBtc(){
-        let url = URL(string: "https://api.bitso.com/v3/ticker?book=xrp_btc")!
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if (error != nil) {
-                print("error")
-            } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
-                    
-                    if ( (json["success"] as? Bool ) == true ){
-                        // payload array
-                        let payload = json["payload"] as? [String: Any]
-                        let ask = payload?["ask"] as? String
-                        // print(ask)
-                        self.item?.title = "1 XRP = " + ask! + " BTC"
-                    }
-                    
-                    
-                } catch let error as NSError{
-                    print(error)
-                }
-            }
-        }).resume()
-        
-        // wait a minute and call again
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60.0, execute: {
-            self.xrpBtc()
-        })
+        currency1 = "xrp"
+        currency2 = "btc"
     }
     
     func xrpMxn(){
-        let url = URL(string: "https://api.bitso.com/v3/ticker?book=xrp_mxn")!
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if (error != nil) {
-                print("error")
-            } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
-                    
-                    if ( (json["success"] as? Bool ) == true ){
-                        // payload array
-                        let payload = json["payload"] as? [String: Any]
-                        let ask = payload?["ask"] as? String
-                        // print(ask)
-                        self.item?.title = "1 XRP = " + ask! + " MXN"
-                    }
-                    
-                    
-                } catch let error as NSError{
-                    print(error)
-                }
-            }
-        }).resume()
-        
-        // wait a minute and call again
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60.0, execute: {
-            self.xrpMxn()
-        })
+        currency1 = "xrp"
+        currency2 = "mxn"
     }
     
     func ethBtc(){
-        let url = URL(string: "https://api.bitso.com/v3/ticker?book=eth_btc")!
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if (error != nil) {
-                print("error")
-            } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
-                    
-                    if ( (json["success"] as? Bool ) == true ){
-                        // payload array
-                        let payload = json["payload"] as? [String: Any]
-                        let ask = payload?["ask"] as? String
-                        // print(ask)
-                        self.item?.title = "1 ETH = " + ask! + " BTC"
-                    }
-                    
-                    
-                } catch let error as NSError{
-                    print(error)
-                }
-            }
-        }).resume()
-        
-        // wait a minute and call again
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60.0, execute: {
-            self.ethBtc()
-        })
+        currency1 = "eth"
+        currency2 = "btc"
     }
     
     func bchBtc(){
-        let url = URL(string: "https://api.bitso.com/v3/ticker?book=bch_btc")!
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if (error != nil) {
-                print("error")
-            } else {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
-                    
-                    if ( (json["success"] as? Bool ) == true ){
-                        // payload array
-                        let payload = json["payload"] as? [String: Any]
-                        let ask = payload?["ask"] as? String
-                        // print(ask)
-                        self.item?.title = "1 BCH = " + ask! + " BTC"
-                    }
-                    
-                    
-                } catch let error as NSError{
-                    print(error)
-                }
-            }
-        }).resume()
-        
-        // wait a minute and call again
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60.0, execute: {
-            self.bchBtc()
-        })
+        currency1 = "bch"
+        currency2 = "btc"
     }
     
     func quitApp() {

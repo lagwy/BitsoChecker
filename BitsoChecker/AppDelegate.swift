@@ -15,11 +15,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
     
     var item : NSStatusItem? = nil
-    var currency1 : String? = "btc"
+    var currency1 : String? = "btc" {
+        didSet {
+            // new values for currencies variables have been set
+            self.operationQueue.cancelAllOperations()
+            loadCurrency()
+        }
+    }
     var currency2 : String? = "mxn"
+    var operationQueue: OperationQueue!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         item = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+        self.operationQueue = OperationQueue()
         
         //Displays text on menu bar
         item?.title = "BitsoChecker"
@@ -67,7 +75,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // wait a minute and call again
         DispatchQueue.main.asyncAfter(deadline: .now() + 60.0, execute: {
-            self.loadCurrency()
+            let tempOperation = BlockOperation(block:{
+                self.loadCurrency()
+            })
+            self.operationQueue.addOperation(tempOperation)
         })
     }
     

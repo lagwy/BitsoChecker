@@ -40,6 +40,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "XRP - MXN", action: #selector(AppDelegate.xrpMxn), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "ETH - BTC", action: #selector(AppDelegate.ethBtc), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "BCH - BTC", action: #selector(AppDelegate.bchBtc), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "LTC - BTC", action: #selector(AppDelegate.ltcBtc), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "LTC - MXN", action: #selector(AppDelegate.ltcMxn), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(AppDelegate.quitApp), keyEquivalent: ""))
         item?.menu = menu
         
@@ -110,6 +112,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func bchBtc(){
         currency1 = "bch"
         currency2 = "btc"
+    }
+    
+    func ltcBtc(){
+        currency1 = "ltc"
+        currency2 = "btc"
+    }
+    
+    func ltcMxn(){
+        currency1 = "ltc"
+        currency2 = "mxn"
     }
     
     func quitApp() {

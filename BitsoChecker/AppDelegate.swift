@@ -48,12 +48,48 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         loadCurrency()
     }
     
+    func showNotification(title : NSString, subtitle : NSString, informativeText : NSString) -> Void {
+        let notification = NSUserNotification()
+        notification.identifier = "unique-id"
+        notification.title = title as String
+        notification.subtitle = subtitle as String
+        notification.informativeText = informativeText as String
+        notification.soundName = NSUserNotificationDefaultSoundName
+        notification.contentImage = NSImage(contentsOf: NSURL(string: "https://placehold.it/300")! as URL)
+        
+        // Manually display the notification
+        
+        let notificationCenter = NSUserNotificationCenter.default
+        
+        notificationCenter.deliver(notification)
+    }
+    
+    func userNotificationCenter(_ center: NSUserNotificationCenter,
+                                shouldPresent notification: NSUserNotification) -> Bool {
+        return true
+    }
+    
     func loadCurrency(){
         let stringUrl = "https://api.bitso.com/v3/ticker?book=" + (self.currency1)! + "_" + (self.currency2)!
         let url = URL(string: stringUrl )
         URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             if (error != nil) {
-                print("error")
+                let code : NSInteger = error!._code;
+                
+                switch (code){
+                case -1004,-1005, -1006: // cannot connect to host,network connection lost, dns lookup failed
+                    self.showNotification(title: "Slow internet connection.", subtitle: "",
+                                          informativeText: "It seemslikethe internet connection is a little slow.");
+                    break
+                case -1009: // not connected to internet
+                    self.showNotification(title: "No internet connection.", subtitle: "", informativeText: "You may want to close this app until you recover the network connection.");
+                    break;
+                default:
+                    let errorString : NSString = error!.localizedDescription as NSString;
+                    self.showNotification(title: "Could not get the information.", subtitle: "",
+                                          informativeText: errorString)
+                    break;
+                }
             } else {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String : AnyObject]
@@ -64,8 +100,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         let ask = payload?["ask"] as? String
                         let menuTitle = "1 " + (self.currency1!).uppercased() + " = " + ask! + " " + (self.currency2!).uppercased() + ""
                         self.item?.title = menuTitle as String
-                        
-                        // print("somethig".uppercased())
                     }
                     
                     

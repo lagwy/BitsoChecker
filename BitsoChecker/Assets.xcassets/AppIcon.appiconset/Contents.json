@@ -1,53 +1,63 @@
 {
   "images" : [
     {
-      "idiom" : "mac",
       "size" : "16x16",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-16.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "16x16",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-32.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "32x32",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-32.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "32x32",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-64.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "128x128",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-128.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "128x128",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-256.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-256.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-512.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-512.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "bitcoin-sign-in-a-circle-with-two-spots-connect-symbol-1024.png",
       "scale" : "2x"
     }
   ],

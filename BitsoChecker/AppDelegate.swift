@@ -69,6 +69,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    func formatCurrency(value: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale(identifier: "es_MX")
+        let result = formatter.string(from: value as NSNumber)
+        return result!
+    }
+    
     func loadCurrency(){
         let stringUrl = "https://api.bitso.com/v3/ticker?book=" + (self.currency1)! + "_" + (self.currency2)!
         let url = URL(string: stringUrl )
@@ -98,7 +107,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         // payload array
                         let payload = json["payload"] as? [String: Any]
                         let ask = payload?["ask"] as? String
-                        let menuTitle = "1 " + (self.currency1!).uppercased() + " = " + ask! + " " + (self.currency2!).uppercased() + ""
+                        
+                        let formatedAsk = self.formatCurrency(value: Double(ask!)!)
+                        
+                        let menuTitle = "1 " + (self.currency1!).uppercased() + " = " + formatedAsk + " " + (self.currency2!).uppercased() + ""
                         self.item?.title = menuTitle as String
                     }
                     
